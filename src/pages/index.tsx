@@ -9,12 +9,17 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       <h1 className={`text-xl`}>
-        Welcome to our chatroom
+        Welcome to Our Chatroom
       </h1>
-      <div className={`text-center mx-auto p-3 m-3 bg-green-100`}>
-        <p>
-          Login box
-        </p>
+      <div className={`text-center p-3 bg-blue-300`}>
+        <button>
+          Create an Account
+        </button>
+      </div>
+      <div className={`text-center p-3 bg-blue-300`}>
+        <button>
+          Login
+        </button>
       </div>
     </main>
   )
