@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,14 +13,14 @@ export default function Home() {
         Welcome to Our Chatroom
       </h1>
       <div className={`text-center p-3 bg-blue-300`}>
-        <button>
+        <Link href="createAccount">
           Create an Account
-        </button>
+        </Link>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
-        <button>
+      <Link href="login">
           Login
-        </button>
+        </Link>
       </div>
     </main>
   )
