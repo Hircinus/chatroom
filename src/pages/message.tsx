@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  
   const [responseData, setResponseData] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8000/api/ext/getMessages")
