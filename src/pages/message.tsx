@@ -7,8 +7,7 @@ import { useEffect } from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [responseData, setResponseData] = useState(null);
-
+  const [responseData, setResponseData] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8000/api/ext/getMessages")
       .then(response => {
@@ -18,6 +17,7 @@ export default function Home() {
         console.error(error);
       });
   }, []);
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -28,9 +28,9 @@ export default function Home() {
       <div className={`text-center p-3 bg-blue-300`}>
         <input type="text"></input>
       </div>
-      {responseData && responseData.map(item => (
-        <div key={item.id}>{item.message}</div>
-      ))}
+      {responseData && responseData.map((item) => {
+        return <div key={item.id}>{item.message}</div>
+      })}
     </main>
   )
 }
