@@ -9,10 +9,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const getData = () =>{
-    const item1 = document.getElementById("name")?.ariaValueText;
-    const item2 = document.getElementById("user")?.ariaValueText;
-    var item3ish = document.getElementById("pass")?.ariaValueText;
-    
+    const item1 = form.name;
+    const item2 = form.user;
+    var item3ish = form.pass
+    console.log(item1)
     if(item1 === '' || item2 === '' || item3ish === ''){
         window.alert("Missing account details");
         return;
@@ -37,6 +37,16 @@ export default function Home() {
         console.log(error);
       });
   }
+  const [form, setForm] = useState({
+    name: '',
+    user: '',
+    pass: ''
+  })
+
+  const changeHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    setForm({ ...form, [event.target.id]: event.target.value })
+  }
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -46,15 +56,15 @@ export default function Home() {
       </h1>
       <div className={`text-center p-3 bg-blue-300`}>
         <h1>Name:</h1>
-        <input type="text" id="name"></input>
+        <input type="text" id="name" onChange={changeHandler}></input>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
         <h1>Username:</h1>
-        <input type="text" id="user"></input>
+        <input type="text" id="user"  onChange={changeHandler}></input>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
         <h1>Password:</h1>
-        <input type="text" id="pass"></input>
+        <input type="text" id="pass" onChange={changeHandler}></input>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
         <button onClick={getData}>Create Account</button>
