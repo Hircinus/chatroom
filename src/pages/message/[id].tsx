@@ -79,14 +79,18 @@ export default function Home() {
           className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
         >
           <div className='p-5 bg-blue-300'>
-            <button className='bg-white rounded text-sm p-1 hover:cursor-pointer' onClick={()=>{logout()}}><FontAwesomeIcon icon={faRightFromBracket} /> Log out</button>
+            <button className='bg-white rounded text-sm p-1 hover:cursor-pointer hover:text-blue-800' onClick={()=>{logout()}}><FontAwesomeIcon icon={faRightFromBracket} /> Log out</button>
             <h1 className={`text-xl text-center m-2`}>
               Feel free to Chat!
             </h1>
-            <h2 className='mt-2 font-bold'>Users online:</h2>
+            <h2 className='m-2 font-bold'>Users registered:</h2>
             <ul>
             {userData && userData.map((user) => {
-              return <li className='ml-2' key={user.id}><button className='bg-white p-1 rounded hover:cursor-pointer hover:text-blue-800' onClick={() => {message(user.id)}}>{user.name} ({user.username})</button></li>
+              if(user.id == router.query.id) {
+                return
+              } else {
+                return <li className='ml-2 mb-1' key={user.id}><button className='bg-white p-1 rounded hover:cursor-pointer hover:text-blue-800' onClick={() => {message(user.id)}}>{user.name} ({user.username})</button></li>
+              }
             })}
             </ul>
           </div>

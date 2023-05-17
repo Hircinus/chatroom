@@ -83,10 +83,10 @@ export default function Home() {
           <h1>Password:</h1>
           <input type="text" id="pass" onChange={changeHandler}></input>
         </div>
-        <button className='p-1 bg-white rounded' onClick={getData}>Create Account</button>
+        <button className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' onClick={getData}>Create Account</button>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
-      <Link className='p-1 bg-white rounded' href="login">
+      <Link className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' href="login">
           Login
         </Link>
       </div>

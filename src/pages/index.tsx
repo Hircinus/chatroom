@@ -32,12 +32,12 @@ export default function Home() {
         Welcome to Our Chatroom
       </h1>
       <div className={`text-center p-3 bg-blue-300`}>
-        <Link href="createAccount">
+        <Link className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' href="createAccount">
           Create an Account
         </Link>
       </div>
       <div className={`text-center p-3 bg-blue-300`}>
-      <Link href="login">
+      <Link className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' href="login">
           Login
         </Link>
       </div>

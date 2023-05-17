@@ -32,7 +32,6 @@ export default function Home() {
     axios.get('http://localhost:8000/api/ext/getUser/'+item.user + "/" + item.pass,{
             })
       .then((response)=>{
-
         setUserData(response.data);
         const userId = response.data[0].id;
         sessionStorage.setItem("auth", "true")
@@ -40,6 +39,9 @@ export default function Home() {
           
       })
       .catch((error)=>{
+        if(error.response.status == 429) {
+          window.alert("The server is overloaded. Please try again later.")
+        }
         console.log(error);
       });
   }
@@ -67,10 +69,10 @@ export default function Home() {
         <input type="text" id="pass" onChange={changeHandler}></input>
       </div>
       
-        <button className='p-1 bg-white rounded hover:text-blue-800' onClick={getData}>Login</button>
+        <button className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' onClick={getData}>Login</button>
     </div>
     <div className={`text-center p-3 bg-blue-300`}>
-    <Link className='p-1 bg-white rounded' href="createAccount">
+    <Link className='p-1 bg-white rounded hover:cursor-pointer hover:text-blue-800' href="createAccount">
           Create account
         </Link>
       

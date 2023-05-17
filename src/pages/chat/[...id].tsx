@@ -9,6 +9,7 @@ import useSessionStorage from '@/hooks/useSessionStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -81,7 +82,7 @@ export default function Home() {
         }
         setInterval(()=>{if(router.query.id!=undefined){
             checkMessages()
-         }}, 15000);
+         }}, 60000);
     
         if(auth == "true") {
             return (
@@ -91,15 +92,18 @@ export default function Home() {
                 <div className={`p-5 bg-blue-300`}>
                     <button className='bg-white p-1 rounded text-left text-sm hover:cursor-pointer' onClick={()=>{window.location.href="http://localhost:3000/message/"+router.query.id[0]}}><FontAwesomeIcon icon={faArrowLeft} /> Go back</button>
                     <h1 className='text-xl text-center'>{username}</h1>
-                    <ul id='messageHolder'>{currentMessages && currentMessages.map((message) => {
+                    <ul className='bg-white p-3 rounded-xl'>{currentMessages && currentMessages.map((message) => {
                     if(message.sender_id == router.query.id[0]) {
                         return <li key={message.id} className='border-b-blue-500 text-left'><strong>You:</strong> {message.message}</li>
                     } else {
                         return <li key={message.id} className='border-b-red-500 text-right'>{username}: {message.message}</li>
                     }
                 })}</ul>
-                    <input type="text" value={content} onChange={e => { setContent(e.currentTarget.value); }}></input>
+                    <input className='rounded p-1' type="text" value={content} onChange={e => { setContent(e.currentTarget.value); }}></input>
                     <button className='bg-white p-1 m-1 rounded hover:cursor-pointer' onClick={() => {sendMessage()}}><FontAwesomeIcon icon={faPaperPlane} /></button>
+                    <div>
+                        <button className='bg-white p-1 m-1 rounded hover:cursor-pointer' onClick={() => {checkMessages()}}><FontAwesomeIcon icon={faArrowsRotate} /> Check messages</button>
+                    </div>
                 </div>
                 </main>
             )
