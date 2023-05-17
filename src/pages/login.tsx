@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router';
+import useSessionStorage from '../hooks/useSessionStorage'
 
     const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,6 @@ export default function Home() {
     }
     var md5 = require('md5');
     const item3 = md5(item2ish);
-    console.log("text"+item3)
     getItem({"user": item1, "pass": item3});
   }
 
@@ -29,15 +29,15 @@ export default function Home() {
     console.log(item.pass)
     console.log(form)
 
-    axios.get('http://localhost:8000/api/ext/getUser/'+item.user + "and"+item.pass,{
+    axios.get('http://localhost:8000/api/ext/getUser/'+item.user + "/" + item.pass,{
             })
       .then((response)=>{
 
-       setUserData(response.data);
-       const userId = response.data[0].id;
-        console.log("Its working")
-        console.log(userId)   
-        
+        setUserData(response.data);
+        const userId = response.data[0].id;
+        sessionStorage.setItem("auth", "true")
+        window.location.href="message/"+userId
+          
       })
       .catch((error)=>{
         console.log(error);
@@ -63,18 +63,18 @@ export default function Home() {
         <div className={`text-center p-3 bg-blue-300`}>
         <h1>Username:</h1>
         <input type="text" id="user" onChange={changeHandler}></input>
-      </div>
-      <h1>Password:</h1>
+        <h1>Password:</h1>
         <input type="text" id="pass" onChange={changeHandler}></input>
+      </div>
+      
+        <button className='p-1 bg-white rounded hover:text-blue-800' onClick={getData}>Login</button>
     </div>
-<div className={`text-center p-3 bg-blue-300`}>
-
-          <Link href="message">
-            Login
-          </Link>
-        </div>
-        <button onClick={getData}>Login</button>
-
+    <div className={`text-center p-3 bg-blue-300`}>
+    <Link className='p-1 bg-white rounded' href="createAccount">
+          Create account
+        </Link>
+      
+    </div>
       
       
     </main>
